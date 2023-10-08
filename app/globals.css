@@ -2,26 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
+.content {
+  @apply bg-[linear-gradient(102.7deg,rgba(253,218,255,1)_8.2%,rgba(223,173,252,1)_19.6%,rgba(173,205,252,1)_36.8%,rgba(173,252,244,1)_73.2%,rgba(202,248,208,1)_90.9%)] bg-fixed flex flex-col justify-center items-center bg-no-repeat bg-cover overflow-hidden h-screen;
+  font-family: "Courier New", Courier, monospace;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+a {
+  @apply text-inherit no-underline;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+* {
+  @apply box-border;
+}
+h1 {
+  @apply text-center text-3xl pb-5 font-extrabold ;
+}
+.game {
+  @apply flex flex-col items-center;
+}
+.game__menu {
+  @apply text-center text-2xl font-semibold;
+}
+.game__board {
+  @apply grid grid-cols-[repeat(3,1fr)] gap-2;
+}
+.square {
+  @apply bg-[#eee] shadow-[0px_4px_#ddd] text-center text-[64px] leading-[100px] font-[bold] w-[100px] h-[100px] cursor-pointer rounded-lg;
+}
+.square.highlight {
+  @apply bg-[aquamarine] shadow-none;
+}
+.modal {
+  @apply w-[250px] shadow-[0px_0px_10px_0px_gray] flex flex-col items-center fixed bg-[white] -translate-x-2/4 -translate-y-2/4 transition-transform duration-[0.2s] p-6 rounded-2xl scale-0 left-2/4 top-2/4;
+}
+.modal.show {
+  @apply -translate-x-2/4 -translate-y-2/4 scale-100;
+}
+.modal__title {
+  @apply text-lg font-[bold] mb-4;
+}
+button {
+  @apply w-full h-9 text-lg font-semibold border-[none];
 }
